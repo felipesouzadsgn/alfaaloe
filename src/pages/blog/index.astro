@@ -1,11 +1,20 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import BlogPage from '../../sections/BlogPage';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.alfaaloe.com.br/' },
+  { name: 'Blog', url: 'https://www.alfaaloe.com.br/blog/' },
+];
 ---
 
 <Layout 
   title="Blog Forever Living | Saúde, Aloe Vera Gel e Oportunidade VIP"
   description="Descubra no Blog da Forever Living dicas de saúde, nutrição com Aloe Vera e como escalar seus ganhos como Empreendedor Oficial FBO."
+  image="https://images.unsplash.com/photo-1556229162-5c4cb51199a0?q=80&w=1200&auto=format&fit=crop"
+  type="website"
+  schemaType="website"
+  schemaBreadcrumbs={breadcrumbs}
 >
   <BlogPage client:load />
 </Layout>

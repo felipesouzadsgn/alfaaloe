@@ -1,11 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import FboPage from '../sections/FboPage';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.alfaaloe.com.br/' },
+  { name: 'Seja FBO', url: 'https://www.alfaaloe.com.br/seja-fbo/' },
+];
 ---
 
 <Layout 
   title="Seja um FBO Forever Living | Revenda Aloe Vera e Comece a Lucrar"
   description="Torne-se Forever Business Owner (FBO) e construa sua independência financeira. Descontos de fábrica e mentoria para iniciar seu negócio. Saiba mais!"
+  image="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1200&auto=format&fit=crop"
+  type="website"
+  schemaType="website"
+  schemaBreadcrumbs={breadcrumbs}
 >
   <FboPage client:load />
 </Layout>

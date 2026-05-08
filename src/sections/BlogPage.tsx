@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import LeadCapture from "../components/LeadCapture";
 import { blogPosts } from "../lib/blog-data";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 
 export default function BlogPage() {
   const featuredPost = blogPosts[0];
@@ -132,6 +133,7 @@ export default function BlogPage() {
               href={createWhatsAppLink(generalMsg)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => trackWhatsAppClick(e, 'blog_page_cta')}
               className="inline-flex items-center gap-3 px-8 py-5 bg-aloe-900 hover:bg-black text-white rounded-2xl font-extrabold text-lg uppercase tracking-widest transition-transform hover:-translate-y-1 shadow-xl shadow-aloe-900/20"
             >
               <MessageCircle className="w-6 h-6" />

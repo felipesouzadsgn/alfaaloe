@@ -1,31 +1,76 @@
 ---
 import '../index.css';
+import SEO from '../components/SEO.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import Tracking from '../components/Tracking.astro';
 
 export interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'product';
+  publishedAt?: string;
+  modifiedAt?: string;
+  author?: string;
+  keywords?: string[];
+  noindex?: boolean;
+  schemaType?: 'website' | 'article' | 'faq' | 'product' | 'localBusiness';
+  schemaTitle?: string;
+  schemaDescription?: string;
+  schemaImage?: string;
+  schemaBreadcrumbs?: Array<{ name: string; url: string }>;
+  schemaArticleBody?: string;
 }
 
-const { 
-  title = "Especialista Forever Living | Aloe Vera Gel e Produtos Naturais",
-  description = "Compre produtos Forever Living Originais. Fale com um Especialista e receba atendimento consultivo. Aloe Vera Gel, Nutrição e oportunidade FBO via WhatsApp."
+const {
+  title,
+  description,
+  image,
+  type = 'website',
+  publishedAt,
+  modifiedAt,
+  author,
+  keywords,
+  noindex,
+  schemaType = 'website',
+  schemaTitle,
+  schemaDescription,
+  schemaImage,
+  schemaBreadcrumbs = [],
+  schemaArticleBody,
 } = Astro.props;
+
+const canonicalUrl = Astro.url.href;
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" sizes="32x32">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#1a3f12">
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      url={canonicalUrl}
+      type={type}
+      publishedAt={publishedAt}
+      modifiedAt={modifiedAt}
+      author={author}
+      keywords={keywords}
+      noindex={noindex}
+    />
+    <SchemaOrg
+      type={schemaType}
+      title={schemaTitle || title}
+      description={schemaDescription || description}
+      url={canonicalUrl}
+      image={schemaImage || image}
+      publishedAt={publishedAt}
+      modifiedAt={modifiedAt}
+      author={author}
+      breadcrumbs={schemaBreadcrumbs}
+      articleBody={schemaArticleBody}
+    />
+    <Tracking />
   </head>
   <body>
     <slot />

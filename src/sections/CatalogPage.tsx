@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Download, MessageCircle, FileText, ChevronRight } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LeadCapture from "../components/LeadCapture";
@@ -119,6 +120,7 @@ export default function CatalogPage() {
               href={createWhatsAppLink(generalMsg)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => trackWhatsAppClick(e, 'catalog_hero_pdf')}
               className="inline-flex items-center gap-2 px-8 py-4 bg-forever-yellow hover:bg-[#e0b000] text-aloe-900 rounded-2xl font-extrabold uppercase tracking-widest transition-transform hover:-translate-y-1 shadow-xl shadow-forever-yellow/20"
             >
               <Download className="w-5 h-5" />
@@ -175,6 +177,7 @@ export default function CatalogPage() {
                           href={createWhatsAppLink(buyMsg)}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => trackWhatsAppClick(e, `catalog_product_${prod.name}`)}
                           className="mt-auto flex items-center justify-between text-aloe-600 font-bold group/btn"
                         >
                           <span className="flex items-center gap-2">

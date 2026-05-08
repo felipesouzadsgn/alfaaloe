@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { MessageCircle, ShieldCheck, Star, Users } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 // Link removed for Astro migration
 
 export default function Hero() {
@@ -43,6 +44,7 @@ export default function Hero() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => trackWhatsAppClick(e, 'hero_cta')}
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-forever-yellow hover:bg-forever-yellow-dark text-aloe-900 rounded-2xl font-bold text-lg transition-transform hover:-translate-y-1 shadow-xl shadow-forever-yellow/20"
             >
               <MessageCircle className="w-6 h-6" />

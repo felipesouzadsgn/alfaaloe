@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { TrendingUp, Globe2, Briefcase, ChevronRight, CheckCircle2 } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LeadCapture from "../components/LeadCapture";
@@ -52,6 +53,7 @@ export default function FboPage() {
                     href={createWhatsAppLink(whatsappMsg)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => trackWhatsAppClick(e, 'fbo_page_hero')}
                     className="inline-flex items-center justify-center gap-3 px-10 py-5 w-full sm:w-auto bg-forever-yellow hover:bg-forever-yellow-dark text-aloe-900 rounded-2xl font-bold text-xl transition-transform hover:-translate-y-1 shadow-xl shadow-forever-yellow/20"
                   >
                     Quero Ser FBO

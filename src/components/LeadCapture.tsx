@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Send, Phone } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackFormSubmit } from "../lib/tracking";
 
 export default function LeadCapture() {
   const [formData, setFormData] = useState({ name: "", email: "", whatsapp: "", interest: "produtos" });
@@ -39,7 +40,7 @@ export default function LeadCapture() {
           </div>
 
           <div className="lg:w-7/12 p-8 lg:p-14">
-            <form action="https://formsubmit.co/alfaaloe.flp@gmail.com" method="POST" className="space-y-6">
+            <form action="https://formsubmit.co/alfaaloe.flp@gmail.com" method="POST" className="space-y-6" onSubmit={() => trackFormSubmit('lead_capture_home', formData)}>
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_next" value={whatsappUrl} />
               <input type="hidden" name="_subject" value="Novo Lead - Forever Living" />

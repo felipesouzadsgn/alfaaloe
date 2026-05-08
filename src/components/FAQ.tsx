@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, MessageCircle } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 
 const faqs = [
   {
@@ -96,6 +97,7 @@ export default function FAQ() {
             href={createWhatsAppLink(whatsappMsg)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => trackWhatsAppClick(e, 'faq_cta')}
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-aloe-900 text-white rounded-xl font-bold transition-transform hover:-translate-y-0.5 shadow-lg shadow-aloe-900/20"
           >
             <MessageCircle className="w-5 h-5" />

@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LeadCapture from "../components/LeadCapture";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 import { blogPosts } from "../lib/blog-data";
 
 interface BlogPostPageProps {
@@ -89,6 +90,7 @@ export default function BlogPostPage({ slug }: BlogPostPageProps) {
                           href={createWhatsAppLink(block.msg || "")} 
                           target="_blank" 
                           rel="noopener noreferrer"
+                          onClick={(e) => trackWhatsAppClick(e, `blog_post_cta_${post.slug}`)}
                           className="inline-flex w-full md:w-auto items-center justify-center gap-2 px-6 py-4 bg-aloe-900 text-white hover:bg-aloe-800 rounded-xl font-bold shadow-md transition-transform hover:-translate-y-1"
                         >
                           <MessageCircle className="w-5 h-5" />

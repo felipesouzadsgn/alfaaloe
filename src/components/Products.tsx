@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { MessageCircle, Droplet, Sparkles, Activity, Scale } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 // Link removed for Astro migration
 
 const categories = [
@@ -112,6 +113,7 @@ export default function Products() {
                     href={createWhatsAppLink(cat.msg)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => trackWhatsAppClick(e, `products_${cat.id}`)}
                     className="inline-flex items-center justify-center gap-2 w-full py-4 mt-3 bg-aloe-900 text-white hover:bg-aloe-800 rounded-xl font-bold transition-transform hover:-translate-y-0.5 shadow-lg shadow-aloe-900/20"
                   >
                     <MessageCircle className="w-5 h-5" />

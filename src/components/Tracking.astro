@@ -1,0 +1,220 @@
+---
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+const GA4_ID = import.meta.env.PUBLIC_GA4_ID;
+const GOOGLE_ADS_ID = import.meta.env.PUBLIC_GOOGLE_ADS_ID;
+const GOOGLE_ADS_WHATSAPP_LABEL = import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_LABEL;
+const GOOGLE_ADS_FORM_LABEL = import.meta.env.PUBLIC_GOOGLE_ADS_FORM_LABEL;
+const GSC_VERIFICATION = import.meta.env.PUBLIC_GSC_VERIFICATION;
+const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID;
+---
+
+<!-- Google Search Console Verification -->
+{GSC_VERIFICATION && (
+  <meta name="google-site-verification" content={GSC_VERIFICATION} />
+)}
+
+<!-- Google Tag Manager (Head) -->
+{GTM_ID && (
+  <script define:vars={{ GTM_ID }}>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer', GTM_ID);
+  </script>
+)}
+
+<!-- Google Tag Manager (Body - NoScript) -->
+{GTM_ID && (
+  <noscript>
+    <iframe 
+      src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+      height="0" 
+      width="0" 
+      style="display:none;visibility:hidden"
+    />
+  </noscript>
+)}
+
+<!-- Google Analytics 4 (direto, caso não use GTM) -->
+{GA4_ID && !GTM_ID && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
+    <script define:vars={{ GA4_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA4_ID, {
+        send_page_view: true,
+        cookie_flags: 'SameSite=None;Secure',
+        cookie_domain: 'auto',
+      });
+    </script>
+  </>
+)}
+
+<!-- Google Ads Conversion Tracking -->
+{GOOGLE_ADS_ID && (
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`} />
+)}
+{GOOGLE_ADS_ID && (
+  <script define:vars={{ GOOGLE_ADS_ID, GOOGLE_ADS_WHATSAPP_LABEL, GOOGLE_ADS_FORM_LABEL }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', GOOGLE_ADS_ID);
+
+    // Funções de conversão globais
+    window.gtagReportConversion = function(url, label) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+        send_to: GOOGLE_ADS_ID + '/' + label,
+        event_callback: callback,
+      });
+      return false;
+    };
+
+    // Evento de conversão para WhatsApp
+    window.trackWhatsAppConversion = function(url) {
+      if (GOOGLE_ADS_WHATSAPP_LABEL) {
+        return window.gtagReportConversion(url, GOOGLE_ADS_WHATSAPP_LABEL);
+      }
+      return true;
+    };
+
+    // Evento de conversão para Formulário
+    window.trackFormConversion = function() {
+      if (GOOGLE_ADS_FORM_LABEL) {
+        gtag('event', 'conversion', {
+          send_to: GOOGLE_ADS_ID + '/' + GOOGLE_ADS_FORM_LABEL,
+        });
+      }
+    };
+  </script>
+)}
+
+<!-- Meta Pixel (Facebook Pixel) -->
+{META_PIXEL_ID && (
+  <script define:vars={{ META_PIXEL_ID }}>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  </script>
+)}
+{META_PIXEL_ID && (
+  <noscript>
+    <img 
+      height="1" 
+      width="1" 
+      style="display:none"
+      src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+    />
+  </noscript>
+)}
+
+<!-- Funções globais de tracking -->
+<script>
+  // Track WhatsApp Click
+  window.trackWhatsApp = function(phone, message, buttonLocation) {
+    // Google Analytics 4
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'whatsapp_click', {
+        event_category: 'engagement',
+        event_label: buttonLocation || 'unknown',
+        phone: phone,
+        message_preview: message ? message.substring(0, 50) : '',
+      });
+    }
+
+    // Meta Pixel
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact', {
+        content_name: buttonLocation || 'WhatsApp Button',
+        content_category: 'engagement',
+      });
+    }
+
+    // Google Ads Conversion
+    if (typeof window.trackWhatsAppConversion === 'function') {
+      window.trackWhatsAppConversion();
+    }
+  };
+
+  // Track Form Submit
+  window.trackFormSubmit = function(formName, formData) {
+    // Google Analytics 4
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'form_submit', {
+        event_category: 'lead',
+        event_label: formName || 'lead_form',
+        form_id: formName,
+        interest: formData?.interest || 'unknown',
+      });
+    }
+
+    // Meta Pixel
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', {
+        content_name: formName || 'Lead Form',
+        content_category: 'lead_generation',
+      });
+    }
+
+    // Google Ads Conversion
+    if (typeof window.trackFormConversion === 'function') {
+      window.trackFormConversion();
+    }
+  };
+
+  // Track Product Interest
+  window.trackProductInterest = function(productName, category) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'select_content', {
+        content_type: 'product',
+        content_id: productName,
+        content_category: category,
+      });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: productName,
+        content_category: category,
+        content_type: 'product',
+      });
+    }
+  };
+
+  // Track CTA Click
+  window.trackCTA = function(ctaName, ctaLocation) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'cta_click', {
+        event_category: 'engagement',
+        event_label: ctaName,
+        location: ctaLocation,
+      });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('trackCustom', 'CTAClick', {
+        cta_name: ctaName,
+        cta_location: ctaLocation,
+      });
+    }
+  };
+</script>

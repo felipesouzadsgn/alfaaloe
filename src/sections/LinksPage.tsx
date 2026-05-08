@@ -16,6 +16,7 @@ import {
 import Footer from "../components/Footer";
 import { blogPosts } from "../lib/blog-data";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick, trackFormSubmit } from "../lib/tracking";
 
 export default function LinksPage() {
   const profileImage = "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop";
@@ -84,6 +85,7 @@ export default function LinksPage() {
               href={createWhatsAppLink(whatsappMsg)}
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={(e) => trackWhatsAppClick(e, 'links_page_social')}
               className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-aloe-900 border border-aloe-100 shadow-sm hover:shadow-md hover:-translate-y-1 hover:text-[#25D366] hover:border-[#25D366] transition-all"
               aria-label="WhatsApp"
             >
@@ -113,6 +115,7 @@ export default function LinksPage() {
               <a 
                 href={createWhatsAppLink("Olá! Quero ver o catálogo de produtos e fazer um pedido.")}
                 target="_blank" rel="noopener noreferrer"
+                onClick={(e) => trackWhatsAppClick(e, 'links_page_buy_now')}
                 className="group flex flex-col items-center justify-center gap-3 w-full p-6 bg-aloe-900 text-white rounded-2xl font-extrabold uppercase tracking-widest hover:bg-black transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-aloe-900/20 text-center"
               >
                 <ShoppingBag className="w-8 h-8 text-forever-yellow" />
@@ -219,7 +222,7 @@ export default function LinksPage() {
                 <p className="text-gray-600 font-medium text-sm">Preencha o formulário e receba informações pelo WhatsApp em instantes.</p>
               </div>
 
-              <form action="https://formsubmit.co/alfaaloe.flp@gmail.com" method="POST" className="space-y-5">
+              <form action="https://formsubmit.co/alfaaloe.flp@gmail.com" method="POST" className="space-y-5" onSubmit={() => trackFormSubmit('lead_capture_links', formData)}>
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_next" value={whatsappUrl} />
                 <input type="hidden" name="_subject" value="Novo Lead - Links Forever Living" />

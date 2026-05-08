@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { TrendingUp, Globe2, Briefcase, ChevronRight } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
+import { trackWhatsAppClick } from "../lib/tracking";
 
 export default function BusinessOpportunity() {
   const whatsappMsg = "Olá, vi a apresentação sobre o Negócio Forever e quero saber como me tornar um Empreendedor Oficial (FBO) com o seu patrocínio.";
@@ -52,6 +53,7 @@ export default function BusinessOpportunity() {
                 href={createWhatsAppLink(whatsappMsg)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => trackWhatsAppClick(e, 'business_opportunity_cta')}
                 className="group inline-flex items-center justify-center w-full sm:w-auto gap-3 px-8 py-5 bg-aloe-900 hover:bg-black text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-aloe-900/30"
               >
                 Quero ser FBO Patrocinado

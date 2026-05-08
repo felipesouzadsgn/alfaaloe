@@ -12,11 +12,39 @@ export function getStaticPaths() {
 
 const { post } = Astro.props;
 const description = post.excerpt.length > 150 ? post.excerpt.substring(0, 147) + '...' : post.excerpt;
+const image = post.image;
+
+// Construir breadcrumbs
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.alfaaloe.com.br/' },
+  { name: 'Blog', url: 'https://www.alfaaloe.com.br/blog/' },
+  { name: post.title, url: `https://www.alfaaloe.com.br/blog/${post.slug}/` },
+];
+
+// Construir o corpo do artigo a partir dos blocos de conteúdo
+const articleBody = post.content
+  .map((block: any) => {
+    if (block.type === 'paragraph') return block.text;
+    if (block.type === 'heading') return block.text;
+    return '';
+  })
+  .join('\n\n');
 ---
 
 <Layout 
-  title={`${post.title.substring(0, 50)} - Forever Living`}
+  title={`${post.title} - Forever Living`}
   description={description}
+  image={image}
+  type="article"
+  publishedAt={new Date().toISOString()}
+  modifiedAt={new Date().toISOString()}
+  author="Especialista Forever Living"
+  schemaType="article"
+  schemaTitle={post.title}
+  schemaDescription={description}
+  schemaImage={image}
+  schemaBreadcrumbs={breadcrumbs}
+  schemaArticleBody={articleBody}
 >
   <BlogPostPage slug={post.slug} client:load />
 </Layout>
