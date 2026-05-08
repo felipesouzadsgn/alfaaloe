@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-aloe-50: #f2fbf4;
+  --color-aloe-100: #e1f5e6;
+  --color-aloe-400: #5cb85c;
+  --color-aloe-500: #2e7d32; /* A richer, more natural botanical green */
+  --color-aloe-600: #1b5e20;
+  --color-aloe-900: #0d3b10;
+  
+  --color-forever-yellow: #FFC600; /* The iconic vibrant Forever yellow */
+  --color-forever-yellow-dark: #E5B200;
+  
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #fcfcfc;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
