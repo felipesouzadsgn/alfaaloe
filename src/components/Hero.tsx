@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { MessageCircle, ShieldCheck, Star, Users } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
-import { Link } from "react-router-dom";
+// Link removed for Astro migration
 
 export default function Hero() {
   const whatsappUrl = createWhatsAppLink("Olá, acessei a página e gostaria de informações sobre os produtos e o catálogo.");
@@ -48,12 +48,12 @@ export default function Hero() {
               <MessageCircle className="w-6 h-6" />
               Catálogo no WhatsApp
             </a>
-            <Link 
-              to="/catalogo"
+            <a 
+              href="/catalogo"
               className="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-medium transition-colors border border-white/20 backdrop-blur-sm"
             >
               Ver Catálogo Completo
-            </Link>
+            </a>
           </div>
 
           <div className="mt-12 flex flex-wrap items-center gap-6 text-sm text-white font-medium">

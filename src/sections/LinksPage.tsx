@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+// Helmet removed for Astro migration
+// Link removed for Astro migration
 import { motion } from "motion/react";
 import { 
   Instagram, 
@@ -36,10 +36,7 @@ export default function LinksPage() {
 
   return (
     <div className="min-h-screen bg-[#f8fcf9] flex flex-col">
-      <Helmet>
-        <title>{name} | Links e Informações</title>
-        <meta name="description" content="Acesse todos os meus links: Catálogo Forever Living, Oportunidade FBO, Blog e Contato Direto." />
-      </Helmet>
+
 
       {/* Main Content */}
       <main className="flex-grow py-12 px-6">
@@ -101,13 +98,13 @@ export default function LinksPage() {
             >
               <Instagram className="w-5 h-5" />
             </a>
-            <Link 
-              to="/"
+            <a 
+              href="/"
               className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-aloe-900 border border-aloe-100 shadow-sm hover:shadow-md hover:-translate-y-1 hover:text-aloe-600 transition-all"
               aria-label="Site Oficial"
             >
               <Globe2 className="w-5 h-5" />
-            </Link>
+            </a>
           </motion.div>
 
           {/* Main Links */}
@@ -124,8 +121,8 @@ export default function LinksPage() {
             </motion.div>
             
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-              <Link 
-                to="/catalogo"
+              <a 
+                href="/catalogo"
                 className="group flex items-center justify-between p-5 bg-white border border-aloe-100 rounded-2xl hover:border-aloe-300 transition-all hover:shadow-md"
               >
                 <div className="flex items-center gap-4">
@@ -135,12 +132,12 @@ export default function LinksPage() {
                   <span className="font-bold text-gray-800">Catálogo Digital Oficial</span>
                 </div>
                 <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-aloe-600 group-hover:translate-x-1 transition-all" />
-              </Link>
+              </a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-              <Link 
-                to="/seja-fbo"
+              <a 
+                href="/seja-fbo"
                 className="group flex items-center justify-between p-5 bg-white border border-aloe-100 rounded-2xl hover:border-aloe-300 transition-all hover:shadow-md"
               >
                 <div className="flex items-center gap-4">
@@ -150,12 +147,12 @@ export default function LinksPage() {
                   <span className="font-bold text-gray-800">Oportunidade FBO (Renda Extra)</span>
                 </div>
                 <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-forever-yellow-dark group-hover:translate-x-1 transition-all" />
-              </Link>
+              </a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-              <Link 
-                to="/blog"
+              <a 
+                href="/blog"
                 className="group flex items-center justify-between p-5 bg-white border border-aloe-100 rounded-2xl hover:border-aloe-300 transition-all hover:shadow-md"
               >
                 <div className="flex items-center gap-4">
@@ -165,7 +162,7 @@ export default function LinksPage() {
                   <span className="font-bold text-gray-800">Dicas Diárias (Blog)</span>
                 </div>
                 <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-aloe-600 group-hover:translate-x-1 transition-all" />
-              </Link>
+              </a>
             </motion.div>
           </section>
 
@@ -188,8 +185,8 @@ export default function LinksPage() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <Link 
-                    to={`/blog/${post.slug}`}
+                  <a 
+                    href={`/blog/${post.slug}`}
                     className="flex gap-4 p-3 bg-white rounded-2xl border border-gray-100 hover:shadow-md hover:border-aloe-200 transition-all group items-center"
                   >
                     <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden relative">
@@ -203,7 +200,7 @@ export default function LinksPage() {
                         Ler artigo <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                       </p>
                     </div>
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </div>

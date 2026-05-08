@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+// Helmet removed for Astro migration
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import AboutFBO from "../components/AboutFBO";
@@ -12,10 +12,7 @@ import Footer from "../components/Footer";
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>Forever Living | Compre Aloe Vera Gel e Produtos Originais</title>
-        <meta name="description" content="Compre produtos Forever Living Originais. Fale com um Especialista via WhatsApp, receba consultoria exclusiva e adquira seu Aloe Vera Gel puro hoje." />
-      </Helmet>
+
       <Header />
       <main>
         <Hero />

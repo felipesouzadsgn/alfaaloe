@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { MessageCircle, Droplet, Sparkles, Activity, Scale } from "lucide-react";
 import { createWhatsAppLink } from "../lib/utils";
-import { Link } from "react-router-dom";
+// Link removed for Astro migration
 
 const categories = [
   {
@@ -101,12 +101,12 @@ export default function Products() {
                     </ul>
                   </div>
 
-                  <Link 
-                    to="/catalogo"
+                  <a 
+                    href="/catalogo"
                     className="inline-flex items-center justify-center w-full py-3.5 mt-4 bg-white border-2 border-aloe-100 text-aloe-900 hover:border-aloe-600 hover:bg-aloe-50 rounded-xl font-bold transition-colors"
                   >
                     Ver Linha Completa
-                  </Link>
+                  </a>
                   
                   <a 
                     href={createWhatsAppLink(cat.msg)}

@@ -4,7 +4,7 @@ import { createWhatsAppLink } from "../lib/utils";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LeadCapture from "../components/LeadCapture";
-import { Helmet } from "react-helmet-async";
+// Helmet removed for Astro migration
 
 const catalogItems = [
   {
@@ -101,10 +101,7 @@ export default function CatalogPage() {
 
   return (
     <div className="min-h-screen bg-[#f8fcf9]">
-      <Helmet>
-        <title>Catálogo Forever Living 2026/2027 | Baixe o PDF Oficial e Preços</title>
-        <meta name="description" content="Navegue pela linha completa de Saúde, Nutrição e Beleza Forever Living. Solicite a tabela de preços oficial e compre pelo WhatsApp. Acesse o catálogo!" />
-      </Helmet>
+
       <Header />
       
       <main>

@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+// Link removed for Astro migration
+// Helmet removed for Astro migration
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LeadCapture from "../components/LeadCapture";
@@ -16,10 +16,7 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-[#f8fcf9]">
-      <Helmet>
-        <title>Blog Forever Living | Saúde, Aloe Vera Gel e Oportunidade VIP</title>
-        <meta name="description" content="Descubra no Blog da Forever Living dicas de saúde, nutrição com Aloe Vera e como escalar seus ganhos como Empreendedor Oficial FBO." />
-      </Helmet>
+
       <Header />
       
       <main>
@@ -64,13 +61,13 @@ export default function BlogPage() {
                    <p className="text-lg text-gray-600 mb-8 leading-relaxed font-medium">
                      {featuredPost.excerpt}
                    </p>
-                   <Link 
-                     to={`/blog/${featuredPost.slug}`}
+                   <a 
+                     href={`/blog/${featuredPost.slug}`}
                      className="inline-flex items-center gap-2 px-8 py-4 bg-aloe-900 hover:bg-black text-white rounded-xl font-bold uppercase tracking-widest transition-transform hover:-translate-y-1 self-start shadow-lg"
                    >
                      Ler Artigo
                      <ArrowRight className="w-5 h-5" />
-                   </Link>
+                   </a>
                 </div>
              </motion.div>
           </div>
@@ -109,13 +106,13 @@ export default function BlogPage() {
                               {post.excerpt}
                             </p>
                          </div>
-                         <Link 
-                           to={`/blog/${post.slug}`}
+                         <a 
+                           href={`/blog/${post.slug}`}
                            className="inline-flex items-center text-sm font-bold text-aloe-600 hover:text-aloe-800 uppercase tracking-wide group/btn"
                          >
                            Ler Artigo Completo
                            <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                         </Link>
+                         </a>
                       </div>
                    </motion.div>
                  );

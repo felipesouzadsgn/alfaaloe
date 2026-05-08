@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, BookOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+// Link removed for Astro migration
 import { blogPosts } from "../lib/blog-data";
 
 export default function Blog() {
@@ -50,13 +50,13 @@ export default function Blog() {
                     {post.excerpt}
                   </p>
 
-                  <Link 
-                    to={`/blog/${post.slug}`}
+                  <a 
+                    href={`/blog/${post.slug}`}
                     className="inline-flex items-center justify-between w-full text-sm font-bold text-aloe-600 hover:text-aloe-800 uppercase tracking-wide group/btn border-t border-gray-100 pt-4"
                   >
                     Ler Artigo Completo
                     <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             );
@@ -64,13 +64,13 @@ export default function Blog() {
         </div>
 
         <div className="mt-16 text-center">
-          <Link 
-            to="/blog"
+          <a 
+            href="/blog"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gray-50 border-2 border-gray-200 text-aloe-900 hover:border-aloe-600 hover:bg-aloe-50 rounded-xl font-bold transition-all shadow-sm"
           >
             <BookOpen className="w-5 h-5" />
             Ver Todos os Artigos
-          </Link>
+          </a>
         </div>
       </div>
     </section>

@@ -1,6 +1,4 @@
-import { useParams, Link } from "react-router-dom";
-import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+// React Router imports removed for Astro migration
 import { ArrowLeft, MessageCircle, Send, CheckCircle2 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -8,25 +6,21 @@ import LeadCapture from "../components/LeadCapture";
 import { createWhatsAppLink } from "../lib/utils";
 import { blogPosts } from "../lib/blog-data";
 
-export default function BlogPostPage() {
-  const { slug } = useParams();
-  
-  const post = blogPosts.find(p => p.slug === slug);
+interface BlogPostPageProps {
+  slug: string;
+}
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+export default function BlogPostPage({ slug }: BlogPostPageProps) {
+  const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
     return (
       <div className="min-h-screen bg-white">
-        <Helmet>
-            <title>Artigo não encontrado | Forever Living</title>
-        </Helmet>
+
         <Header />
         <div className="container mx-auto px-6 py-24 text-center">
           <h1 className="text-4xl font-bold text-aloe-900 mb-6">Artigo não encontrado.</h1>
-          <Link to="/" className="text-aloe-600 font-bold hover:underline">Voltar para a página inicial</Link>
+          <a href="/" className="text-aloe-600 font-bold hover:underline">Voltar para a página inicial</a>
         </div>
         <Footer />
       </div>
@@ -37,10 +31,7 @@ export default function BlogPostPage() {
 
   return (
     <div className="min-h-screen bg-[#f8fcf9]">
-      <Helmet>
-        <title>{post.title.substring(0, 50)} - Forever Living</title>
-        <meta name="description" content={post.excerpt.length > 150 ? post.excerpt.substring(0, 147) + '...' : post.excerpt} />
-      </Helmet>
+
       <Header />
       
       <main>
@@ -52,10 +43,10 @@ export default function BlogPostPage() {
           </div>
           <div className="container mx-auto px-6 py-20 lg:py-28 relative z-10 max-w-4xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
-              <Link to="/blog" className="inline-flex items-center text-white hover:text-white font-bold text-sm uppercase tracking-widest bg-white/10 hover:bg-white/20 border border-white/30 px-5 py-2.5 rounded-full transition-all w-fit backdrop-blur-md shadow-sm">
+              <a href="/blog" className="inline-flex items-center text-white hover:text-white font-bold text-sm uppercase tracking-widest bg-white/10 hover:bg-white/20 border border-white/30 px-5 py-2.5 rounded-full transition-all w-fit backdrop-blur-md shadow-sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Voltar ao Blog
-              </Link>
+              </a>
               
               <div className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-lg bg-black/20 backdrop-blur-md border border-white/10 text-forever-yellow font-bold text-sm tracking-widest uppercase shadow-sm">
                 <Icon className="w-4 h-4" />
@@ -116,13 +107,13 @@ export default function BlogPostPage() {
                         <p className="text-aloe-900/80 m-0 font-bold">{block.text}</p>
                       </div>
                       <div className="md:w-1/3 w-full">
-                        <Link 
-                          to="/seja-fbo" 
+                        <a 
+                          href="/seja-fbo" 
                           className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 bg-aloe-900 text-white hover:bg-black rounded-xl font-bold shadow-md transition-transform hover:-translate-y-1"
                         >
                           <Send className="w-5 h-5" />
                           Quero ser FBO
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   );

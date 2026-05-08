@@ -5,18 +5,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LeadCapture from "../components/LeadCapture";
 import AboutFBO from "../components/AboutFBO";
-import { HashLink } from "react-router-hash-link";
-import { Helmet } from "react-helmet-async";
+// HashLink removed for Astro migration
+// Helmet removed for Astro migration
 
 export default function FboPage() {
   const whatsappMsg = "Olá, quero preencher meu cadastro e me tornar um Empreendedor Oficial da Forever Living.";
   
   return (
     <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>Seja um FBO Forever Living | Revenda Aloe Vera e Comece a Lucrar</title>
-        <meta name="description" content="Torne-se Forever Business Owner (FBO) e construa sua independência financeira. Descontos de fábrica e mentoria para iniciar seu negócio. Saiba mais!" />
-      </Helmet>
+
       <Header />
       
       <main>
@@ -133,12 +130,12 @@ export default function FboPage() {
                     <p className="text-gray-600 text-lg mb-8 leading-relaxed">
                        Não basta vender, é preciso dominar o setor de saúde, nutrição e o plano de marketing. Nosso Hub de Conteúdo prepara nossos distribuidores para lidarem com as maiores objeções e educarem os clientes sobre o poder curativo do genuíno gel de Aloe Vera.
                     </p>
-                    <HashLink 
-                       to="/#blog"
+                    <a 
+                       href="/#blog"
                        className="inline-block px-8 py-4 bg-white border-2 border-aloe-600 text-aloe-600 hover:bg-aloe-600 hover:text-white rounded-xl font-bold transition-colors uppercase tracking-wide"
                     >
                        Acessar Diário de Conteúdos
-                    </HashLink>
+                    </a>
                  </div>
                  <div className="md:w-1/2 flex justify-center">
                     <div className="relative">

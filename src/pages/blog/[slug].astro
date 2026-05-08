@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogPostPage from '../../sections/BlogPostPage';
+import { blogPosts } from '../../lib/blog-data';
+
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const description = post.excerpt.length > 150 ? post.excerpt.substring(0, 147) + '...' : post.excerpt;
+---
+
+<Layout 
+  title={`${post.title.substring(0, 50)} - Forever Living`}
+  description={description}
+>
+  <BlogPostPage slug={post.slug} client:load />
+</Layout>
